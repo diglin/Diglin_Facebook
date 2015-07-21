@@ -11,14 +11,14 @@
 <config>
     <modules>
         <Diglin_Facebook>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </Diglin_Facebook>
     </modules>
 
     <default>
         <diglin_facebook>
             <config>
-                <enabled>1</enabled>
+                <enabled>0</enabled>
                 <pixel_id />
             </config>
         </diglin_facebook>
