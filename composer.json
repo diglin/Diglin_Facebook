@@ -1,0 +1,14 @@
+{
+    "name": "diglin/diglin_facebook",
+    "description": "Add Facebook Custom Audience Tags for Magento",
+    "type": "magento-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Sylvain Raye",
+            "email": "support@diglin.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

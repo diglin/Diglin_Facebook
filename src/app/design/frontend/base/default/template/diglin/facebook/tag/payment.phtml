@@ -1,0 +1,21 @@
+<?php
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author      Sylvain Rayé <support at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Facebook
+ * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
+ */
+?>
+<script>
+    document.observe("dom:loaded", function() {
+        Form.getElements('co-payment-form').each(function (input) {
+            if (input.type.toLowerCase() == 'radio' || input.type.toLowerCase() == 'checkbox') {
+                Event.observe(input, 'click', function(el){ fbq('track', 'AddPaymentInfo', {value: el.value}) });
+            } else {
+                Event.observe(input, 'change', function(el){ fbq('track', 'AddPaymentInfo', {value: el.value}) });
+            }
+        });
+    });
+</script>
