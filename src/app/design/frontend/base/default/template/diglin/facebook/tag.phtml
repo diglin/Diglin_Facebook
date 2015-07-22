@@ -26,10 +26,7 @@ $tags = $this->getTags();
 <?php if ($tags): ?>
     <?php echo $tags ?>
 <?php endif ?>
-
-    function addTag(tag) {
-        eval(tag);
-    }
+    function addTag(tag){eval(tag);}
 </script>
 <noscript><img height="1" width="1" style="display:none"
                src="https://www.facebook.com/tr?id=<?php echo $pixelId ?>&ev=PageView&noscript=1"
