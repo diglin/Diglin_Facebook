@@ -13,7 +13,6 @@
     <default>
         <reference name="head">
             <block type="diglin_facebook/tag" ifconfig="diglin_facebook/config/enabled" name="diglin_facebook_tag" as="diglin_facebook_tag" template="diglin/facebook/tag.phtml"/>
-            <block type="core/template" ifconfig="diglin_facebook/config/enabled" name="diglin_facebook_tag" as="diglin_facebook_tag" template="diglin/facebook/tag.phtml"/>
         </reference>
     </default>
 

@@ -60,10 +60,10 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
             $productName = Mage::helper('core')->quoteEscape($product->getName());
 
             $this->_tags[] = "fbq('track', 'ViewContent', {"
-                . "content_name : '{$productName}'," . "\n"
-                . "content_category : '{$category}'," . "\n"
-                . "value : " . round($product->getPrice(), 2) . "," . "\n"
-                . "currency : {$this->getCurrency()}," . "\n"
+                . "content_name : '{$productName}',"
+                . "content_category : '{$category}',"
+                . "value : " . round($product->getPrice(), 2) . ","
+                . "currency : {$this->getCurrency()},"
                 . "content_ids : ['{$product->getId()}']"
                 . "});";
         }
