@@ -63,7 +63,7 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
                 . "content_name : '{$productName}',"
                 . "content_category : '{$category}',"
                 . "value : " . round($product->getPrice(), 2) . ","
-                . "currency : {$this->getCurrency()},"
+                . "currency : '{$this->getCurrency()}',"
                 . "content_ids : ['{$product->getId()}']"
                 . "});";
         }
