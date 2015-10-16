@@ -38,7 +38,7 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
 
         $return = implode("\n", $this->_tags);
 
-        Mage::log($return);
+//        Mage::log($return);
 
         return $return;
     }
