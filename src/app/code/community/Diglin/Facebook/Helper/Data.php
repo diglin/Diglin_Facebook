@@ -36,7 +36,7 @@ class Diglin_Facebook_Helper_Data extends Mage_Core_Helper_Abstract {
      * @param Mage_Catalog_Model_Product $product
      * @return string
      */
-    public function getAddToCartTag(Mage_Catalog_Model_Product $product, $functionWrapper = false)
+    public function getAddToCartTag(Mage_Catalog_Model_Product $product, $functionWrapper = false, $escape = false)
     {
         if (!$this->isEnabled()) {
             return '';
@@ -52,6 +52,10 @@ HTML;
             $tag = "addTag('$tag');";
         }
 
+        if ($escape) {
+            $tag = $this->quoteEscape($tag);
+        }
+
         return $tag;
     }
 
@@ -59,7 +63,7 @@ HTML;
      * @param Mage_Catalog_Model_Product $product
      * @return string
      */
-    public function getAddToWishlistTag(Mage_Catalog_Model_Product $product, $functionWrapper = false)
+    public function getAddToWishlistTag(Mage_Catalog_Model_Product $product, $functionWrapper = false, $escape = false)
     {
         if (!$this->isEnabled()) {
             return '';
@@ -80,6 +84,10 @@ HTML;
         if ($functionWrapper) {
             $tag = $this->jsQuoteEscape($tag);
             $tag = "addTag('$tag');";
+        }
+
+        if ($escape) {
+            $tag = $this->quoteEscape($tag);
         }
 
         return $tag;
