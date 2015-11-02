@@ -36,11 +36,7 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
 
         Mage::dispatchEvent('diglin_facebook_get_tags', array('tags' => $this->_tags));
 
-        $return = implode("\n", $this->_tags);
-
-//        Mage::log($return);
-
-        return $return;
+        return implode("\n", $this->_tags);
     }
 
     /**
