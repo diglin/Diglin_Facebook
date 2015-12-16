@@ -5,7 +5,7 @@
  *
  * @author      Sylvain Rayé <support at diglin.com>
  * @category    Diglin
- * @package     Diglin_
+ * @package     Diglin_Facebook
  * @copyright   Copyright (c) 2011-2015 Diglin (http://www.diglin.com)
  */
 class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
@@ -48,20 +48,23 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
             /* @var $this Mage_Catalog_Model_Product */
             $product = Mage::registry('product');
 
-            $category = null;
-            if ($product->getCategory()) {
-                $category = Mage::helper('core')->quoteEscape($product->getCategory()->getName());
-            }
+            $this->_tags[] = $this->getFBHelper()->getTag('ViewContent', $product);
 
-            $productName = Mage::helper('core')->quoteEscape($product->getName());
-
-            $this->_tags[] = "fbq('track', 'ViewContent', {"
-                . "content_name : '{$productName}',"
-                . "content_category : '{$category}',"
-                . "value : " . round($product->getPrice(), 2) . ","
-                . "currency : '{$this->getCurrency()}',"
-                . "content_ids : ['{$product->getId()}']"
-                . "});";
+//            $category = null;
+//            if ($product->getCategory()) {
+//                $category = Mage::helper('core')->quoteEscape($product->getCategory()->getName());
+//            }
+//
+//            $productName = Mage::helper('core')->quoteEscape($product->getName());
+//
+//            $this->_tags[] = "fbq('track', 'ViewContent', {"
+//                . "content_name : '{$productName}', "
+//                . "content_category : '{$category}', "
+//                . "content_type : 'product', "
+//                . "value : " . round($product->getPrice(), 2) . ", "
+//                . "currency : '{$this->getCurrency()}', "
+//                . "content_ids : ['{$this->getFBHelper()->getProductId($product)}']"
+//                . "});";
         }
     }
 
@@ -85,7 +88,6 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
     public function getInitiateCheckoutTag($handle)
     {
         if ( 'checkout_onepage_index' == $handle || 'checkout_multishipping_index' == $handle ) {
-
             if ('checkout_onepage_index' == $handle) {
                 $quote = Mage::getSingleton('checkout/type_onepage')->getQuote();
             } else {
@@ -110,14 +112,23 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
             } else {
                 $session = Mage::getSingleton('checkout/type_multishipping')->getCheckoutSession();
             }
+
             $order = Mage::getModel('sales/order')->load($session->getLastOrderId());
 
-            if ($order->getId()) {
+            if (!$order->getId()) {
                 return;
             }
 
+            /* @var $item Mage_Sales_Model_Order_Item */
             foreach ($order->getAllItems() as $item) {
-                $this->_tags[] = "fbq('track', 'Purchase', {value: '{$item->getRowTotalInclTax()}', currency: '{$order->getOrderCurrencyCode()}', content_name : '{$item->getName()}', content_type : 'product', content_ids : ['{$item->getProductId()}']});";
+                $productId = ($this->getFBHelper()->getProductIdType($order->getStore()) == 'sku') ? $item->getSku() : $item->getProductId();
+
+                $this->_tags[] = "fbq('track', 'Purchase', { "
+                    . "value: '". round($item->getRowTotalInclTax(), 2) ."', "
+                    . "currency: '{$order->getOrderCurrencyCode()}', "
+                    . "content_name : '{$item->getName()}', "
+                    . "content_type : 'product', "
+                    . "content_ids : ['{$productId}']});";
             }
         }
     }
@@ -132,8 +143,19 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
         }
     }
 
+    /**
+     * @return Diglin_Facebook_Helper_Data
+     */
+    public function getFBHelper()
+    {
+        return Mage::helper('diglin_facebook');
+    }
+
+    /**
+     * @return string
+     */
     public function getCurrency()
     {
-        return Mage::helper('diglin_facebook')->getCurrency();
+        return $this->getFBHelper()->getCurrency();
     }
 }

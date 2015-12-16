@@ -20,6 +20,7 @@
             <config>
                 <enabled>0</enabled>
                 <pixel_id />
+                <product_id>sku</product_id>
             </config>
         </diglin_facebook>
     </default>

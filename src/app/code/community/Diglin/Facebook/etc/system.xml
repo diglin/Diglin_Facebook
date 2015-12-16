@@ -42,6 +42,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </pixel_id>
+                        <product_id translate="label comment">
+                            <label>Product ID</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>diglin_facebook/config_source_id</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_id>
                     </fields>
                 </config>
             </groups>
