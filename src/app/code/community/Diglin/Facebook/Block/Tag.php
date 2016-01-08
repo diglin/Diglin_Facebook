@@ -10,6 +10,9 @@
  */
 class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
 {
+    /**
+     * @var array
+     */
     protected $_tags = array();
 
     /**
@@ -41,35 +44,23 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
 
     /**
      * @param $handle
+     * @return $this
      */
     public function getViewContentTag($handle)
     {
         if (strpos('catalog_product_view', $handle) !== false) {
-            /* @var $this Mage_Catalog_Model_Product */
+            /* @var $product Mage_Catalog_Model_Product */
             $product = Mage::registry('product');
 
             $this->_tags[] = $this->getFBHelper()->getTag('ViewContent', $product);
-
-//            $category = null;
-//            if ($product->getCategory()) {
-//                $category = Mage::helper('core')->quoteEscape($product->getCategory()->getName());
-//            }
-//
-//            $productName = Mage::helper('core')->quoteEscape($product->getName());
-//
-//            $this->_tags[] = "fbq('track', 'ViewContent', {"
-//                . "content_name : '{$productName}', "
-//                . "content_category : '{$category}', "
-//                . "content_type : 'product', "
-//                . "value : " . round($product->getPrice(), 2) . ", "
-//                . "currency : '{$this->getCurrency()}', "
-//                . "content_ids : ['{$this->getFBHelper()->getProductId($product)}']"
-//                . "});";
         }
+
+        return $this;
     }
 
     /**
      * @param $handle
+     * @return $this
      */
     public function getSearchTag($handle)
     {
@@ -80,10 +71,12 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
 
             $this->_tags[] = "fbq('track', 'Search', {value : '" . $query->getQueryText() . "'});";
         }
+        return $this;
     }
 
     /**
      * @param $handle
+     * @return $this
      */
     public function getInitiateCheckoutTag($handle)
     {
@@ -97,10 +90,13 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
             $numItems = count($quote->getAllItems());
             $this->_tags[] = "fbq('track', 'InitiateCheckout', {num_items : '{$numItems}'});";
         }
+
+        return $this;
     }
 
     /**
      * @param $handle
+     * @return $this
      */
     public function getPurchaseTag($handle)
     {
@@ -114,7 +110,6 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
             }
 
             $order = Mage::getModel('sales/order')->load($session->getLastOrderId());
-
             if (!$order->getId()) {
                 return;
             }
@@ -122,15 +117,17 @@ class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
             /* @var $item Mage_Sales_Model_Order_Item */
             foreach ($order->getAllItems() as $item) {
                 $productId = ($this->getFBHelper()->getProductIdType($order->getStore()) == 'sku') ? $item->getSku() : $item->getProductId();
+                $name = Mage::helper('diglin_facebook')->escapeHtml($item->getName());
 
                 $this->_tags[] = "fbq('track', 'Purchase', { "
                     . "value: '". round($item->getRowTotalInclTax(), 2) ."', "
                     . "currency: '{$order->getOrderCurrencyCode()}', "
-                    . "content_name : '{$item->getName()}', "
+                    . "content_name : '{$name}', "
                     . "content_type : 'product', "
                     . "content_ids : ['{$productId}']});";
             }
         }
+        return $this;
     }
 
     /**

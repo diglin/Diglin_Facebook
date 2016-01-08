@@ -75,11 +75,10 @@ class Diglin_Facebook_Helper_Data extends Mage_Core_Helper_Abstract {
 
         $category = null;
         if ($product->getCategory()) {
-            $category = Mage::helper('core')->quoteEscape($product->getCategory()->getName());
+            $category = $this->escapeHtml($product->getCategory()->getName());
         }
 
-        $productName = str_replace("'"," ", $product->getName());
-//        $productName = Mage::helper('core')->quoteEscape($product->getName());
+        $productName = $this->escapeHtml($product->getName());
         $price = round($product->getPrice(), 2);
 
         $tag = <<<HTML
