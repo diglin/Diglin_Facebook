@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Diglin GmbH - Switzerland
+ *
+ * @author      Sylvain Rayé <support at diglin.com>
+ * @category    Diglin
+ * @package     Diglin_Facebook
+ * @copyright   Copyright (c) 2011-2016 Diglin (http://www.diglin.com)
+ */-->
+<config>
+    <modules>
+        <Diglin_Facebook>
+            <version>1.0.1</version>
+        </Diglin_Facebook>
+    </modules>
+
+    <default>
+        <diglin_facebook>
+            <config>
+                <enabled>0</enabled>
+                <pixel_id />
+                <product_id>sku</product_id>
+            </config>
+        </diglin_facebook>
+    </default>
+
+    <global>
+        <models>
+            <diglin_facebook>
+                <class>Diglin_Facebook_Model</class>
+                <resourceModel>diglin_facebook_resource</resourceModel>
+            </diglin_facebook>
+            <diglin_facebook_resource>
+                <class>Diglin_Facebook_Model_Resource</class>
+            </diglin_facebook_resource>
+        </models>
+        <blocks>
+            <diglin_facebook>
+                <class>Diglin_Facebook_Block</class>
+            </diglin_facebook>
+        </blocks>
+        <helpers>
+            <diglin_facebook>
+                <class>Diglin_Facebook_Helper</class>
+            </diglin_facebook>
+        </helpers>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <diglin_facebook>
+                    <file>diglin/facebook.xml</file>
+                </diglin_facebook>
+            </updates>
+        </layout>
+    </frontend>
+</config>

@@ -1,0 +1,15 @@
+{
+    "name": "diglin/diglin_facebook",
+    "description": "Add Facebook Tracking Tags for eCommerce and Product Ads",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Sylvain Rayé",
+            "email": "support@diglin.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    }
+}

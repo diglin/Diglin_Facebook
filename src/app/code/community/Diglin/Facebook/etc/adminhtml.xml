@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <diglin_facebook translate="title" module="diglin_facebook">
+                                        <title>Diglin Facebook Tracking Audience</title>
+                                        <sort_order>1</sort_order>
+                                    </diglin_facebook>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
