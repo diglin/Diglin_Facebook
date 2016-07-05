@@ -11,7 +11,7 @@ Necessary to make Facebook retargeting with Facebook Product Ads for example.
 
 ### Via modman
 - Install [modman](https://github.com/colinmollenhour/modman)
-- Use the command from your Magento installation folder: `modman clone https://github.com/diglin/Diglin_AdminTheme.git`
+- Use the command from your Magento installation folder: `modman clone https://github.com/diglin/Diglin_Facebook.git`
 
 ### Via Composer
 
@@ -52,7 +52,7 @@ Go to the menu `System > Configuration > Diglin > Facebook` and set your Pixel I
 
 ### Via modman
 
-`modman remove Diglin_AdminTheme`
+`modman remove Diglin_Facebook`
 
 ### Via manually
 
