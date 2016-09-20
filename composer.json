@@ -9,7 +9,7 @@
         }
     ],
     "minimum-stability": "stable",
-    "require":{
+    "require": {
         "magento-hackathon/magento-composer-installer":"*"
     }
 }

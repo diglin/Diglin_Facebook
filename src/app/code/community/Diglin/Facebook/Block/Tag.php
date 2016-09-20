@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Diglin GmbH - Switzerland
  *
@@ -7,6 +6,10 @@
  * @category    Diglin
  * @package     Diglin_Facebook
  * @copyright   Copyright (c) 2011-2016 Diglin (http://www.diglin.com)
+ */
+
+/**
+ * Class Diglin_Facebook_Block_Tag
  */
 class Diglin_Facebook_Block_Tag extends Mage_Core_Block_Template
 {
